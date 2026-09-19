@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MADE ANOMA — DROP 01</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:#fff;color:#0a0a0a;font-family:Inter,Arial,sans-serif}
+body{overflow-x:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:28px 32px 24px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:
+radial-gradient(circle at 50% 42%,rgba(255,255,255,.08),transparent 35%),
+linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.55));pointer-events:none}
+nav,.content,.bottom{position:relative;z-index:2}
+nav{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.18em;text-transform:none}
+.logo{font-size:20px;font-weight:900;letter-spacing:.12em}
+.navlink{color:#0a0a0a;text-decoration:none}
+.content{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px}
+.kicker{font-size:11px;letter-spacing:.35em;text-transform:none;opacity:.6}
+h1{font-size:clamp(70px,14vw,190px);line-height:.82;letter-spacing:-.09em;font-weight:900}.wordmark{font-weight:900;text-transform:none}
+.date{font-size:13px;letter-spacing:.25em;text-transform:none;margin-top:6px}
+.countdown{display:flex;gap:clamp(12px,3vw,42px);margin-top:22px}
+.unit{min-width:72px}
+.num{font-size:clamp(34px,5vw,68px);font-weight:700;letter-spacing:-.06em;line-height:1}
+.label{font-size:9px;letter-spacing:.22em;text-transform:none;opacity:.55;margin-top:8px}
+.cta{margin-top:24px;padding:14px 28px;border:1px solid rgba(255,255,255,.45);color:#0a0a0a;text-decoration:none;font-size:10px;letter-spacing:.22em;text-transform:none;transition:.25s}
+.cta:hover{background:#0a0a0a;color:#fff}
+.bottom{display:flex;justify-content:space-between;align-items:end;font-size:9px;letter-spacing:.18em;text-transform:none;opacity:.555}
+@media(max-width:600px){
+.hero{padding:22px 18px 18px}
+nav{font-size:9px}
+.logo{font-size:16px}
+.countdown{gap:8px}
+.unit{min-width:58px}
+.num{font-size:34px}
+.bottom{font-size:8px}
+}
+</style>
+</head>
+<body>
+<main class="hero">
+<nav>
+<div class="logo">anoma.</div>
+<a class="navlink" href="https://www.instagram.com/madeanoma/" target="_blank">Instagram ↗</a>
+</nav>
+
+<section class="content">
+<div class="kicker">drop 01</div>
+<h1 class="wordmark">anoma.</h1>
+<div class="date">11.11.2026 — 17:00</div>
+
+<div class="countdown" aria-label="Countdown">
+<div class="unit"><div class="num" id="days">00</div><div class="label">Days</div></div>
+<div class="unit"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
+<div class="unit"><div class="num" id="minutes">00</div><div class="label">Minutes</div></div>
+<div class="unit"><div class="num" id="seconds">00</div><div class="label">Seconds</div></div>
+</div>
+
+<a class="cta" href="https://www.instagram.com/madeanoma/" target="_blank">Follow the drop</a>
+</section>
+
+<div class="bottom">
+<span>anoma.</span>
+<span>11.11.26 / 17:00</span>
+</div>
+</main>
+
+<script>
+const target = new Date("2026-11-11T17:00:00+02:00").getTime();
+function pad(n){return String(n).padStart(2,"0")}
+function update(){
+  const diff = target - Date.now();
+  const d = document.getElementById("days");
+  const h = document.getElementById("hours");
+  const m = document.getElementById("minutes");
+  const s = document.getElementById("seconds");
+  if(diff <= 0){
+    d.textContent=h.textContent=m.textContent=s.textContent="00";
+    document.querySelector(".kicker").textContent="DROP IS LIVE";
+    return;
+  }
+  d.textContent = Math.floor(diff/86400000);
+  h.textContent = pad(Math.floor(diff%86400000/3600000));
+  m.textContent = pad(Math.floor(diff%3600000/60000));
+  s.textContent = pad(Math.floor(diff%60000/1000));
+}
+update();
+setInterval(update,1000);
+</script>
+</body>
+</html>
